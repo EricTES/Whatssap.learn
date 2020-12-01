@@ -17,14 +17,15 @@ namespace Whatssap.Learn.Services
         public ServiceResponse<User> SignUpUser(User user) 
         {
             try
-            {
-                user.UserId = userRepository.Insert(user);
+            {  
                 if (string.IsNullOrWhiteSpace(user.PasswordHash)) return new ServiceResponse<User> { ErrorMessage = "Password cannot be empty", Success = false };
                 user.PasswordHash = ComputeHash(user.PasswordHash);
                 if (string.IsNullOrWhiteSpace(user.PhoneNumber)) return new ServiceResponse<User> { ErrorMessage = "Phone number cannot be empty", Success = false };
                 if (string.IsNullOrWhiteSpace(user.FirstName)) return new ServiceResponse<User> { ErrorMessage = "First Name cannot be empty", Success = false };
                 if (string.IsNullOrWhiteSpace(user.LastName)) return new ServiceResponse<User> { ErrorMessage = "Last Name cannot be empty", Success = false };
-                user.DateJoined = DateTime.Now;        
+                user.DateJoined = DateTime.Now;
+
+                user.UserId = userRepository.Insert(user);
 
                 return new ServiceResponse<User> { ErrorMessage = string.Empty, Response = user, Success = true };
             }
@@ -54,8 +55,6 @@ namespace Whatssap.Learn.Services
         #endregion
 
         #region private methods
-
-        // organise code : private should be in different file or at the bottom
         private string ComputeHash(string password)
         {
             using (var sha256 = System.Security.Cryptography.SHA256.Create())

@@ -41,7 +41,7 @@ namespace Whatssap.Learn.Repository
 
                 connection.Open();
 
-                return (int) command.ExecuteScalar();
+                return int.Parse(command.ExecuteScalar().ToString());
             }
         }
 
