@@ -5,11 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Whatssap.Learn.Entities\Whatssap.Learn.Entities.csproj" />
+    <ProjectReference Include="..\Whatssap.Learn.Repository\Whatssap.Learn.Repository.csproj" />
   </ItemGroup>
 
 </Project>
