@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Whatssap.Learn.Repository;
+using Whatssap.Learn.Services;
 
 namespace Whatssap.Learn.WebApi
 {
@@ -32,6 +34,9 @@ namespace Whatssap.Learn.WebApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Whatssap.Learn.WebApi", Version = "v1" });
             });
+            services.AddTransient(typeof(IUserRepository)
+                , c => new UserRepository(Configuration.GetConnectionString("WhatssapDB")));
+            services.AddTransient<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
